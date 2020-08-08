@@ -7,7 +7,7 @@ services:
     - ACCEPT_EULA=Y
     - MSSQL_PID=Express
     - SA_PASSWORD=Mudar12345@
-    - MSSQL_DATABASE=sample01
+    - MSSQL_DATABASE=sonar01
     - MSSQL_DATABASE_COLLATE=SQL_Latin1_General_CP1_CI_AI
     - MSSQL_USER=userdb01
     - MSSQL_PASSWORD=Mudar12345*
@@ -16,16 +16,18 @@ services:
    volumes:
      - dbData:/var/opt/mssql/data
      - dbLog:/var/opt/mssql/log
-     - dbSecrets:/var/opt/mssql/secrets  
+     - dbSecrets:/var/opt/mssql/secrets 
+   ports:
+      - 1433:1433  
   sonar:
     image: sonarqube:8.4.1-community
     container_name: sonarqube
     ports:
       - 9091:9000
     environment:
-      - SONAR_JDBC_URL=jdbc:sqlserver://db:1433;database=sample01;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
-      - SONAR_JDBC_USERNAME=userdb01
-      - SONAR_JDBC_PASSWORD=Mudar12345*
+      - SONAR_JDBC_URL=jdbc:sqlserver://Server=db:1433;database=sonar01;encrypt=true;trustServerCertificate=false;loginTimeout=30;
+      - SONAR_JDBC_USERNAME=sa
+      - SONAR_JDBC_PASSWORD=Mudar12345@
     volumes:
       - sonarqube_data:/opt/sonarqube/data
       - sonarqube_extensions:/opt/sonarqube/extensions
