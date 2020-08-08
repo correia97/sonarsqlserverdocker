@@ -1,0 +1,53 @@
+version: '3'
+services:
+  db:
+   image: correia97/mssql-server-linux
+   container_name: sqlserver
+   environment:
+    - ACCEPT_EULA=Y
+    - MSSQL_PID=Express
+    - SA_PASSWORD=Mudar12345@
+    - MSSQL_DATABASE=sample01
+    - MSSQL_DATABASE_COLLATE=SQL_Latin1_General_CP1_CI_AI
+    - MSSQL_USER=userdb01
+    - MSSQL_PASSWORD=Mudar12345*
+   networks:
+    - dataBase
+   volumes:
+     - dbData:/var/opt/mssql/data
+     - dbLog:/var/opt/mssql/log
+     - dbSecrets:/var/opt/mssql/secrets  
+  sonar:
+    image: sonarqube:8.4.1-community
+    container_name: sonarqube
+    ports:
+      - 9000:9000
+    environment:
+      - SONAR_JDBC_URL=jdbc:sqlserver://db:1433;database=sample01;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+      - SONAR_JDBC_USERNAME=userdb01
+      - SONAR_JDBC_PASSWORD=Mudar12345*
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs  
+    depends_on:
+     - db
+    networks:
+     - dataBase
+     - external   
+
+networks: 
+  dataBase:
+  external:
+
+volumes:
+  dbData:
+  dbLog:
+  dbSecrets:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
+
+
+
+
