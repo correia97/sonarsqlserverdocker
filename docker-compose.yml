@@ -21,7 +21,7 @@ services:
     image: sonarqube:8.4.1-community
     container_name: sonarqube
     ports:
-      - 9000:9000
+      - 9091:9000
     environment:
       - SONAR_JDBC_URL=jdbc:sqlserver://db:1433;database=sample01;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
       - SONAR_JDBC_USERNAME=userdb01
