@@ -1,7 +1,7 @@
 version: '3'
 services:
   db:
-   image: correia97/mssql-server-linux
+   image: correia97/mssql-server-linux:2019-latest
    container_name: sqlserver
    environment:
     - ACCEPT_EULA=Y
