@@ -40,7 +40,9 @@ services:
 
 networks: 
   dataBase:
+    driver: overlay
   external:
+    driver: overlay
 
 volumes:
   dbData:
@@ -49,7 +51,3 @@ volumes:
   sonarqube_data:
   sonarqube_extensions:
   sonarqube_logs:
-
-
-
-
