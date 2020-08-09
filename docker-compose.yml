@@ -26,8 +26,8 @@ services:
       - 9091:9000
     environment:
       - SONAR_JDBC_URL=jdbc:sqlserver://db:1433;databaseName=sonar01
-      - SONAR_JDBC_USERNAME=sa
-      - SONAR_JDBC_PASSWORD=Mudar12345@
+      - SONAR_JDBC_USERNAME=userdb01
+      - SONAR_JDBC_PASSWORD=Mudar12345*
     volumes:
       - sonarqube_data:/opt/sonarqube/data
       - sonarqube_extensions:/opt/sonarqube/extensions
